@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Pacijent>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Lista pacijenata</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Pacijenti" asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> &nbsp; Dodaj pacijenta
+            </a>
+        </div>
+    </div>
+    <br /><br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr class="table-primary" style="color:dimgray">
+                <th>
+                    Ime i prezime
+                </th>
+                <th>
+                    Spol
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td style="width:50%;">
+                        @obj.ImePrezime
+                    </td>
+                    <td style="width:30%">
+                        @obj.Spol
+                    </td>
+                    <td>
+                        <div class="w-100 btn-group" role="group">
+                            <a asp-controller="Pacijenti" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-info mx-2" style="border-radius:2px;"><i class="bi bi-pencil-square"></i> Uredi</a>
+                            <form method="post" asp-controller="Pacijenti" asp-action="Delete" asp-route-id="@obj.Id">
+                                <button type="submit" class="btn btn-danger mx-1" style="border-radius:2px;"><i class="bi bi-trash3"></i> Obriši</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

@@ -1,0 +1,60 @@
+﻿@model Pacijent
+@{
+    ViewData["Title"] = "Uređivanje";
+}
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Uređivanje podataka o pacijentu</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All">
+		</div>
+		<div class="mb-3">
+			<label asp-for="ImePrezime"></label>
+			<input asp-for="ImePrezime" class="form-control" />
+			<span asp-validation-for="ImePrezime" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="DatumRodjenja"></label>
+			<input asp-for="DatumRodjenja" class="form-control" type="date" />
+			<span asp-validation-for="DatumRodjenja" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Spol"></label>
+			<select name="Spol" class="form-select">
+				@foreach (var sp in Enum.GetValues(typeof(Spol)))
+				{
+					if (sp.ToString() == Model.Spol.ToString())
+					{
+						<option value="@sp" selected>@sp</option>
+					}
+					else
+					{
+						<option value="@sp">@sp</option>
+					}
+				}
+			</select>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Adresa"></label>
+			<input asp-for="Adresa" class="form-control" />
+			<span asp-validation-for="Adresa" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="BrojTelefona"></label>
+			<input asp-for="BrojTelefona" class="form-control" />
+			<span asp-validation-for="BrojTelefona" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-success" style="width:150px">Sačuvaj</button>
+		<a asp-controller="Pacijenti" asp-action="Index" class="btn btn-secondary" style="width:150px">Nazad na listu pacijenata</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+	}
+
