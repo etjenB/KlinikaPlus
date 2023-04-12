@@ -35,6 +35,7 @@ namespace KlinikaPlusWeb.Controllers
             {
                 _db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Nalazi ON");
                 _db.Nalazi.Add(nalaz);
+                _db.Prijemi.Find(obj.PrijemId).NalazId=obj.PrijemId;
                 _db.SaveChanges();
                 _db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Nalazi OFF");
                 return RedirectToAction("Index", "Prijemi");

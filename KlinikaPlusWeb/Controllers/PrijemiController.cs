@@ -108,6 +108,8 @@ namespace KlinikaPlusWeb.Controllers
             {
                 return NotFound();
             }
+            var nal = _db.Nalazi.FirstOrDefault(n => n.PrijemId == obj.Id);
+            if (nal != null) _db.Nalazi.Remove(nal);
             _db.Prijemi.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
