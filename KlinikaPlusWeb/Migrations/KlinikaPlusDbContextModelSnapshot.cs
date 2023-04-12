@@ -163,8 +163,7 @@ namespace KlinikaPlusWeb.Migrations
 
             modelBuilder.Entity("KlinikaPlusWeb.Models.Nalaz", b =>
                 {
-                    b.Navigation("Prijem")
-                        .IsRequired();
+                    b.Navigation("Prijem");
                 });
 
             modelBuilder.Entity("KlinikaPlusWeb.Models.Pacijent", b =>

@@ -27,8 +27,12 @@ namespace KlinikaPlusWeb.Controllers
         }
 
         //GET Filtrirani prijemi
-        public IActionResult FilterPrijemi(DateTime dtOd, DateTime dtDo)
+        public IActionResult FilterPrijemi(DateTime? dtOd, DateTime? dtDo)
         {
+            if (dtOd==null||dtDo==null)
+            {
+                return RedirectToAction("Index");
+            }
             var objPrijemi = _db.Prijemi.Where(p => p.DatumIVrijeme >= dtOd && p.DatumIVrijeme <= dtDo).ToList();
             foreach (var p in objPrijemi)
             {

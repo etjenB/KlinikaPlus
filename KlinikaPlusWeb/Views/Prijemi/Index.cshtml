@@ -86,7 +86,7 @@
                     </td>
                     <td>
                         <div class="w-100 btn-group" role="group">
-                            <a asp-controller="Prijemi" asp-action="Edit" asp-route-id="@obj?.Id" class="btn btn-info mx-2" style="border-radius:2px;"><i class="bi bi-pencil-square"></i> Dodaj nalaz</a>
+                            <a onclick="nalazPopup('@Url.Action("Create", "Nalazi", new{ pid = obj?.Id }, Context.Request.Scheme)', 'Dodaj nalaz')" class="btn btn-info mx-2" style="border-radius:2px;"><i class="bi bi-pencil-square"></i> Dodaj nalaz</a>
                             <form method="post" asp-controller="Prijemi" asp-action="Delete" asp-route-id="@obj?.Id">
                                 <button type="submit" class="btn btn-danger mx-1" style="border-radius:2px;"><i class="bi bi-trash3"></i> Obriši</button>
                             </form>

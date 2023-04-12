@@ -1,0 +1,22 @@
+﻿@model Nalaz
+@{
+	ViewData["Title"] = "Create";
+	Layout = null;
+}
+
+<form method="post" asp-controller="Nalazi" asp-action="Create">
+	<div class="border p-3 mt-4">
+		<div asp-validation-summary="All">
+		</div>
+		<input type="hidden" asp-for="DatumIVrijemeKreiranja" />
+		<input type="hidden" asp-for="PrijemId" />
+		<input type="hidden" asp-for="Prijem"/>
+		<div class="mb-3">
+			<label asp-for="TekstualniOpis">Tekstualni opis</label>
+			<input asp-for="TekstualniOpis" class="form-control"/>
+			<span asp-validation-for="TekstualniOpis" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-success" style="width:150px">Dodaj</button>
+	</div>
+</form>
+

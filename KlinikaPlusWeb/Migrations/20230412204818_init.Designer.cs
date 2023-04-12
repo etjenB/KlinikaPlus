@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KlinikaPlusWeb.Migrations
 {
     [DbContext(typeof(KlinikaPlusDbContext))]
-    [Migration("20230410155148_init")]
+    [Migration("20230412204818_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,9 @@ namespace KlinikaPlusWeb.Migrations
                     b.Property<string>("Sifra")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Titula")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -162,8 +165,7 @@ namespace KlinikaPlusWeb.Migrations
 
             modelBuilder.Entity("KlinikaPlusWeb.Models.Nalaz", b =>
                 {
-                    b.Navigation("Prijem")
-                        .IsRequired();
+                    b.Navigation("Prijem");
                 });
 
             modelBuilder.Entity("KlinikaPlusWeb.Models.Pacijent", b =>

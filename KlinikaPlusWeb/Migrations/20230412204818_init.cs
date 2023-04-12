@@ -17,6 +17,7 @@ namespace KlinikaPlusWeb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prezime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Titula = table.Column<int>(type: "int", nullable: false),
                     Sifra = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
