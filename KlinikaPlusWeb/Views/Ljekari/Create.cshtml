@@ -1,0 +1,48 @@
+﻿@model Ljekar
+
+@{
+	ViewData["Title"] = "Dodavanje ljekara";
+}
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Dodavanje ljekara</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All">
+		</div>
+		<div class="mb-3">
+			<label asp-for="Ime"></label>
+			<input asp-for="Ime" class="form-control" />
+			<span asp-validation-for="Ime" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Prezime"></label>
+			<input asp-for="Prezime" class="form-control"/>
+			<span asp-validation-for="Prezime" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Titula"></label>
+			<select name="Titula" class="form-select">
+				@foreach (var tt in Enum.GetValues(typeof(Titula)))
+				{
+					<option value="@tt">@tt</option>
+				}
+			</select>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Sifra"></label>
+			<input asp-for="Sifra" class="form-control" />
+			<span asp-validation-for="Sifra" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-success" style="width:150px">Dodaj</button>
+		<a asp-controller="Ljekari" asp-action="Index" class="btn btn-secondary" style="width:150px">Nazad na listu ljekara</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

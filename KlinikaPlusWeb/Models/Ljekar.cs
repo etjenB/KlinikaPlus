@@ -22,6 +22,9 @@ namespace KlinikaPlusWeb.Models
         public string Prezime { get; set; }
 
         [Required]
+        public Titula Titula { get; set; }
+
+        [Required]
         [Display(Name = "Šifra")]
         public string Sifra { get; set; }
 

@@ -1,17 +1,17 @@
-﻿@model IEnumerable<Pacijent>
+﻿@model IEnumerable<Ljekar>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Ljekari";
 }
 
 <div class="container p-3">
 
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Lista pacijenata</h2>
+            <h2 class="text-primary">Lista ljekara</h2>
         </div>
         <div class="col-6 text-end">
-            <a asp-controller="Pacijenti" asp-action="Create" class="btn btn-success">
-                <i class="bi bi-plus-circle"></i> &nbsp; Dodaj pacijenta
+            <a asp-controller="Ljekari" asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> &nbsp; Dodaj ljekara
             </a>
         </div>
     </div>
@@ -19,21 +19,18 @@
 
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
-            <tr class="table-primary" style="color:dimgray">
+            <tr class="table-warning" style="color:dimgray">
                 <th>
-                    Ime i prezime
+                    Ime
                 </th>
                 <th>
-                    Datum rođenja
+                    Prezime
                 </th>
                 <th>
-                    Spol
+                    Titula
                 </th>
                 <th>
-                    Adresa
-                </th>
-                <th>
-                    Telefon
+                    Šifra
                 </th>
                 <th></th>
             </tr>
@@ -43,24 +40,21 @@
             {
                 <tr>
                     <td style="width:30%;">
-                        @obj.ImePrezime
+                        @obj.Ime
                     </td>
-                    <td style="width:15%;">
-                        @obj.DatumRodjenja.ToShortDateString()
+                    <td style="width:25%;">
+                        @obj.Prezime
                     </td>
                     <td style="width:15%">
-                        @obj.Spol
+                        @obj.Titula
                     </td>
                     <td style="width:10%">
-                        @obj?.Adresa
-                    </td>
-                    <td style="width:10%">
-                        @obj?.BrojTelefona
+                        @obj.Sifra
                     </td>
                     <td>
                         <div class="w-100 btn-group" role="group">
-                            <a asp-controller="Pacijenti" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-info mx-2" style="border-radius:2px;"><i class="bi bi-pencil-square"></i> Uredi</a>
-                            <form method="post" asp-controller="Pacijenti" asp-action="Delete" asp-route-id="@obj.Id">
+                            <a asp-controller="Ljekari" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-info mx-2" style="border-radius:2px;"><i class="bi bi-pencil-square"></i> Uredi</a>
+                            <form method="post" asp-controller="Ljekari" asp-action="Delete" asp-route-id="@obj.Id">
                                 <button type="submit" class="btn btn-danger mx-1" style="border-radius:2px;"><i class="bi bi-trash3"></i> Obriši</button>
                             </form>
                         </div>

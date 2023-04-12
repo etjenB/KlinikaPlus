@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Prijem>
+@{
+    ViewData["Title"] = "Prijemi";
+}
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<div class="container p-3">
+
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Tabela prijema</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Prijemi" asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> &nbsp; Dodaj prijem
+            </a>
+        </div>
+    </div>
+    <br /><br />
+
+    <form method="get" asp-controller="Prijemi" asp-action="FilterPrijemi" id="filterForma">
+    <div class="row pt-4">
+        <div class="col-12">
+            <h5 class="text-primary">Filtriraj prijem</h5>
+        </div>
+        <div class="col-2">
+            <div class="mb-3">
+                <label for="dtOd">Od:</label>
+                <input id="dtOd" name="dtOd" type="date" />
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-3">
+                <label for="dtDo">Do:</label>
+                <input id="dtDo" name="dtDo" type="date" />
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-warning">Filtriraj</button>
+        </div>
+    </div>
+    </form>
+    <br /><br />
+
+    <table class="table table-bordered table-striped" style="width:100%" id="tabelaPrijema">
+        <thead>
+            <tr class="table-success" style="color:dimgray">
+                <th>
+                    Pacijent
+                </th>
+                <th>
+                    Datum i vrijeme
+                </th>
+                <th>
+                    Ljekar
+                </th>
+                <th>
+                    Hitan
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td style="width:25%;">
+                        @obj?.Pacijent?.ImePrezime
+                    </td>
+                    <td style="width:20%;">
+                        @obj?.DatumIVrijeme.ToLocalTime()
+                    </td>
+                    <td style="width:25%">
+                        @obj?.Ljekar?.Ime @obj?.Ljekar?.Prezime - @obj?.Ljekar?.Titula
+                    </td>
+                    <td style="width:10%;">
+                        @if (obj?.HitanPrijem==true)
+                        {
+                            <a>Da</a>
+                        }else{
+                            <a>Ne</a>
+                        }
+                    </td>
+                    <td>
+                        <div class="w-100 btn-group" role="group">
+                            <a asp-controller="Prijemi" asp-action="Edit" asp-route-id="@obj?.Id" class="btn btn-info mx-2" style="border-radius:2px;"><i class="bi bi-pencil-square"></i> Dodaj nalaz</a>
+                            <form method="post" asp-controller="Prijemi" asp-action="Delete" asp-route-id="@obj?.Id">
+                                <button type="submit" class="btn btn-danger mx-1" style="border-radius:2px;"><i class="bi bi-trash3"></i> Obriši</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

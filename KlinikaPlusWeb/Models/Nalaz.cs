@@ -10,7 +10,7 @@ namespace KlinikaPlusWeb.Models
 
         [Required]
         [Display(Name = "Datum i vrijeme kreiranja")]
-        public DateTime DatumIVrijemeKreiranja { get; set; }
+        public DateTime DatumIVrijemeKreiranja { get; set; } = DateTime.Now;
 
         [Key]
         public int PrijemId { get; set; }

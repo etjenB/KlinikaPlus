@@ -1,0 +1,53 @@
+﻿@inject KlinikaPlusWeb.Data.KlinikaPlusDbContext _db
+@model Prijem
+
+@{
+	ViewData["Title"] = "Dodavanje prijema";
+}
+
+<form method="post">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Dodavanje prijema</h2>
+			<hr />
+		</div>
+		<div asp-validation-summary="All">
+		</div>
+		<div class="mb-3">
+			<label asp-for="DatumIVrijeme">Datum i vrijeme</label>
+			<input asp-for="DatumIVrijeme" class="form-control" type="datetime-local" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+			<span asp-validation-for="DatumIVrijeme" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="LjekarId"></label>
+			<select name="LjekarId" class="form-select">
+				@foreach (var ljekar in _db.Ljekari.Where(l=>l.Titula==Titula.Specijalista).ToList())
+				{
+					<option value="@ljekar.Id">@ljekar.Ime @ljekar.Prezime</option>
+				}
+			</select>
+		</div>
+		<div class="mb-3">
+			<label asp-for="PacijentId"></label>
+			<select name="PacijentId" class="form-select">
+				@foreach (var pacijent in _db.Pacijenti.ToList())
+				{
+					<option value="@pacijent.Id">@pacijent.ImePrezime</option>
+				}
+			</select>
+		</div>
+		<div class="mb-3">
+			<label asp-for="HitanPrijem">Hitan</label>
+			<input asp-for="HitanPrijem" class="form-check-input" type="checkbox" />
+			<span asp-validation-for="HitanPrijem" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-success" style="width:150px">Dodaj</button>
+		<a asp-controller="Prijemi" asp-action="Index" class="btn btn-secondary" style="width:150px">Nazad na listu prijema</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
