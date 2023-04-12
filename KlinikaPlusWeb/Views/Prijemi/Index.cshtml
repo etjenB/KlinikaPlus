@@ -90,7 +90,7 @@
                                 if(obj?.NalazId==null){
                                     <a onclick="nalazPopup('@Url.Action("Create", "Nalazi", new{ pid = obj?.Id }, Context.Request.Scheme)', 'Dodaj nalaz')" class="btn btn-info mx-2" style="border-radius:2px;"><i class="bi bi-pencil-square"></i> Dodaj nalaz</a>
                                 }else{
-                                    <button class="btn btn-warning mx-2" style="border-radius:2px;" disabled>Nalaz postoji</button>
+                                    <button onclick="nalazPopupDetails('@Url.Action("Details", "Nalazi", new{ pid = obj?.Id }, Context.Request.Scheme)', 'Nalaz')" class="btn btn-warning mx-2" style="border-radius:2px;">Pregled nalaza</button>
                                 }
                             }
                             <form method="post" asp-controller="Prijemi" asp-action="Delete" asp-route-id="@obj?.Id">

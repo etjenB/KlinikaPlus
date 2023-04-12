@@ -28,7 +28,10 @@ namespace KlinikaPlusWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Nalaz obj)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Prijemi");
+            }
             _db.Database.OpenConnection();
             Nalaz nalaz = new Nalaz() { PrijemId = obj.PrijemId, TekstualniOpis = obj.TekstualniOpis};
             try
@@ -44,6 +47,17 @@ namespace KlinikaPlusWeb.Controllers
             {
                 _db.Database.CloseConnection();
             }
+        }
+
+        [HttpGet]
+        public IActionResult Details(int pid)
+        {
+            Nalaz nalaz = _db.Nalazi.FirstOrDefault(n=>n.PrijemId==pid);
+            if (nalaz!=null)
+            {
+                return View(nalaz);
+            }
+            return NotFound();
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿@model Nalaz
 @{
-	ViewData["Title"] = "Dodaj nalaz";
+	ViewData["Title"] = "Nalaz";
 	Layout = null;
 }
 
-<form method="post" asp-controller="Nalazi" asp-action="Create">
+<form>
 	<div class="border p-3 mt-4">
 		<div asp-validation-summary="All">
 		</div>
@@ -13,10 +13,13 @@
 		<input type="hidden" asp-for="Prijem"/>
 		<div class="mb-3">
 			<label asp-for="TekstualniOpis">Tekstualni opis</label>
-			<input asp-for="TekstualniOpis" class="form-control"/>
+			<input asp-for="TekstualniOpis" class="form-control" disabled/>
 			<span asp-validation-for="TekstualniOpis" class="text-danger"></span>
 		</div>
-		<button type="submit" class="btn btn-success" style="width:150px">Dodaj</button>
+		<div class="mb-3">
+			<label asp-for="DatumIVrijemeKreiranja">Datum dodavanja</label>
+			<input asp-for="DatumIVrijemeKreiranja" class="form-control" disabled />
+			<span asp-validation-for="DatumIVrijemeKreiranja" class="text-danger"></span>
+		</div>
 	</div>
 </form>
-

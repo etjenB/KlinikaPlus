@@ -15,3 +15,15 @@ nalazPopup = (url, title) =>{
         }
     })
 }
+
+nalazPopupDetails = (url, title) => {
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function (res) {
+            $("#nalazModal  .modal-body").html(res);
+            $("#nalazModal  .modal-title").html(title);
+            $("#nalazModal").modal("show");
+        }
+    })
+}
