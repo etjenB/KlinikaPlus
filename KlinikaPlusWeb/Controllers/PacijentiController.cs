@@ -80,6 +80,14 @@ namespace KlinikaPlusWeb.Controllers
             {
                 return NotFound();
             }
+            //Kada se obrise Pacijent brisu se svi prijemi vezani za datog pacijenta
+            foreach (var pr in _db.Prijemi.ToList())
+            {
+                if (pr.PacijentId==obj.Id)
+                {
+                    _db.Prijemi.Remove(pr);
+                }
+            }
             _db.Pacijenti.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");

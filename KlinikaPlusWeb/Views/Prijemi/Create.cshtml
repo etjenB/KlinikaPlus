@@ -19,7 +19,7 @@
 			<span asp-validation-for="DatumIVrijeme" class="text-danger"></span>
 		</div>
 		<div class="mb-3">
-			<label asp-for="LjekarId"></label>
+			<label asp-for="LjekarId">Ljekar</label>
 			<select name="LjekarId" class="form-select">
 				@foreach (var ljekar in _db.Ljekari.Where(l=>l.Titula==Titula.Specijalista).ToList())
 				{
@@ -28,7 +28,7 @@
 			</select>
 		</div>
 		<div class="mb-3">
-			<label asp-for="PacijentId"></label>
+			<label asp-for="PacijentId">Pacijent</label>
 			<select name="PacijentId" class="form-select">
 				@foreach (var pacijent in _db.Pacijenti.ToList())
 				{
