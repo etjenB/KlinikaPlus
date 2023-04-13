@@ -126,22 +126,28 @@
                     <th style="background-color: #B8DBFD;border: 1px solid #ccc">
                     Hitan
                 </th>
+                    <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                        Tekst nalaz
+                    </th>
+                    <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                        Datum i vrijeme nalaza
+                    </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var obj in Model)
             {
                 <tr>
-                        <td style="width:120px;border: 1px solid #ccc">
+                        <td style="width:60px;border: 1px solid #ccc">
                         @obj?.Pacijent?.ImePrezime
                     </td>
-                        <td style="width:120px;border: 1px solid #ccc">
+                        <td style="width:60px;border: 1px solid #ccc">
                         @obj?.DatumIVrijeme.ToLocalTime()
                     </td>
-                        <td style ="width:120px;border: 1px solid #ccc">
+                        <td style="width:60px;border: 1px solid #ccc">
                         @obj?.Ljekar?.Ime @obj?.Ljekar?.Prezime - @obj?.Ljekar?.Titula
                     </td>
-                        <td style="width:120px;border: 1px solid #ccc">
+                        <td style="width:60px;border: 1px solid #ccc">
                         @if (obj?.HitanPrijem==true)
                         {
                             <a>Da</a>
@@ -149,6 +155,26 @@
                             <a>Ne</a>
                         }
                     </td>
+                        @{
+                            if (obj?.Nalaz == null)
+                            {
+                                <td style="width:60px;border: 1px solid #ccc">
+                                    Nema
+                                </td>
+                                <td style="max-width:120px;border: 1px solid #ccc">
+                                    Nema
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="max-width:120px;border: 1px solid #ccc">
+                                    @obj?.Nalaz.TekstualniOpis
+                                </td>
+                                <td style="width:60px;border: 1px solid #ccc">
+                                    @obj?.Nalaz.DatumIVrijemeKreiranja
+                                </td>
+                            }
+                        }
                 </tr>
              }
             </tbody>
@@ -158,7 +184,7 @@
     <br />
     <form asp-action="Export" asp-controller="Prijemi" method="post">
         <input type="hidden" name="GridHtml" />
-        <input type="submit" id="btnSubmit" value="Export" />
+        <input class="btn btn-outline-success" type="submit" id="btnSubmit" value="Preuzmi listu prijema" />
     </form>
 
 </div>

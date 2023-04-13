@@ -23,6 +23,10 @@ namespace KlinikaPlusWeb.Controllers
             {
                 p.Ljekar = _db.Ljekari.FirstOrDefault(l => l.Id == p.LjekarId);
                 p.Pacijent = _db.Pacijenti.FirstOrDefault(pac => pac.Id == p.PacijentId);
+                if (p.NalazId!=null)
+                {
+                    p.Nalaz = _db.Nalazi.FirstOrDefault(n => n.PrijemId == p.NalazId);
+                }
             }
             return View(objPrijemi);
         }
@@ -39,6 +43,10 @@ namespace KlinikaPlusWeb.Controllers
             {
                 p.Ljekar = _db.Ljekari.FirstOrDefault(l => l.Id == p.LjekarId);
                 p.Pacijent = _db.Pacijenti.FirstOrDefault(pac => pac.Id == p.PacijentId);
+                if (p.NalazId != null)
+                {
+                    p.Nalaz = _db.Nalazi.FirstOrDefault(n => n.PrijemId == p.NalazId);
+                }
             }
             return View("Index", objPrijemi);
         }
@@ -108,7 +116,7 @@ namespace KlinikaPlusWeb.Controllers
             using (MemoryStream stream = new MemoryStream())
             {
                 HtmlConverter.ConvertToPdf(GridHtml, stream);
-                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+                return File(stream.ToArray(), "application/pdf", "ListaPrijema" + DateTime.Now.ToShortDateString() + ".pdf");
             }
         }
     }
