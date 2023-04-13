@@ -13,7 +13,7 @@
 		<input type="hidden" asp-for="Prijem"/>
 		<div class="mb-3">
 			<label asp-for="TekstualniOpis">Tekstualni opis</label>
-			<input asp-for="TekstualniOpis" class="form-control"/>
+			<textarea asp-for="TekstualniOpis" class="form-control" rows="16"></textarea>
 			<span asp-validation-for="TekstualniOpis" class="text-danger"></span>
 		</div>
 		<button type="submit" class="btn btn-success" style="width:150px">Dodaj</button>
