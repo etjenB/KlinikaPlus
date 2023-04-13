@@ -1,4 +1,5 @@
-﻿using KlinikaPlusWeb.Data;
+﻿using iText.Html2pdf;
+using KlinikaPlusWeb.Data;
 using KlinikaPlusWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -80,20 +81,6 @@ namespace KlinikaPlusWeb.Controllers
             return View(objPrijemi);
         }
 
-        ////POST
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Edit(Ljekar obj)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _db.Ljekari.Update(obj);
-        //        _db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(obj);
-        //}
-
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -113,6 +100,16 @@ namespace KlinikaPlusWeb.Controllers
             _db.Prijemi.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Export(string GridHtml)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                HtmlConverter.ConvertToPdf(GridHtml, stream);
+                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+            }
         }
     }
 }

@@ -5,6 +5,13 @@
 
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#Grid").html());
+            });
+        });
+    </script>
 </head>
 
 <div class="container p-3">
@@ -102,6 +109,57 @@
             }
         </tbody>
     </table>
+
+    <div id="Grid" hidden>
+        <table cellpadding="5" cellspacing="0" style="border: 1px solid #ccc;font-size: 9pt;">
+        <thead>
+            <tr>
+                    <th style ="background-color: #B8DBFD;border: 1px solid #ccc">
+                    Pacijent
+                </th>
+                    <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                    Datum i vrijeme
+                </th>
+                    <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                    Ljekar
+                </th>
+                    <th style="background-color: #B8DBFD;border: 1px solid #ccc">
+                    Hitan
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                        <td style="width:120px;border: 1px solid #ccc">
+                        @obj?.Pacijent?.ImePrezime
+                    </td>
+                        <td style="width:120px;border: 1px solid #ccc">
+                        @obj?.DatumIVrijeme.ToLocalTime()
+                    </td>
+                        <td style ="width:120px;border: 1px solid #ccc">
+                        @obj?.Ljekar?.Ime @obj?.Ljekar?.Prezime - @obj?.Ljekar?.Titula
+                    </td>
+                        <td style="width:120px;border: 1px solid #ccc">
+                        @if (obj?.HitanPrijem==true)
+                        {
+                            <a>Da</a>
+                        }else{
+                            <a>Ne</a>
+                        }
+                    </td>
+                </tr>
+             }
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <br />
+    <form asp-action="Export" asp-controller="Prijemi" method="post">
+        <input type="hidden" name="GridHtml" />
+        <input type="submit" id="btnSubmit" value="Export" />
+    </form>
 
 </div>
 
